@@ -26,4 +26,10 @@ allRouter.get('/sellers', (req, res) => {
     res.json(results);
 });
 
+allRouter.get('/marketplaces', (req, res) => {
+    const stmt = db.prepare("SELECT * FROM Marketplaces");
+    const results = stmt.all();
+    res.json(results);
+});
+
 export default allRouter;
