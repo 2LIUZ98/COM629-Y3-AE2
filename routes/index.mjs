@@ -14,4 +14,10 @@ allRouter.get('/categories', (req, res) => {
     res.json(results);
 });
 
+allRouter.get('/brands', (req, res) => {
+    const stmt = db.prepare("SELECT * FROM Brands");
+    const results = stmt.all();
+    res.json(results);
+});
+
 export default allRouter;
