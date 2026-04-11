@@ -8,4 +8,10 @@ allRouter.get('/products', (req, res) => {
     res.json(results);
 });
 
+allRouter.get('/categories', (req, res) => {
+    const stmt = db.prepare("SELECT * FROM Categories");
+    const results = stmt.all();
+    res.json(results);
+});
+
 export default allRouter;
