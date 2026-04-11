@@ -3,14 +3,50 @@ const searchRouter = express.Router();
 import db from './db.mjs';
 import xss from 'xss';
 
-searchRouter.get('/product/:keyword', (req, res) => {
-    const keyword = "%" + xss(req.params.keyword) + "%";
+searchRouter.get('/products', (req, res) => {
+    let query = `
+        SELECT Products.*, Product_Sellers.price, Product_Sellers.seller_id
+        FROM Products
+        LEFT JOIN Product_Sellers
+        ON Products.Product_ID = Product_Sellers.Product_ID
+        WHERE 1=1
+    `;
 
-    const stmt = db.prepare(
-        "SELECT * FROM Products WHERE product_name LIKE ?"
-    );
+    let params = [];
 
-    const results = stmt.all(keyword);
+    if (req.query.keyword) {
+        query += " AND Products.product_name LIKE ?";
+        params.push(`%${xss(req.query.keyword)}%`);
+    }
+
+    if (req.query.category) {
+        query += " AND Products.category_id = ?";
+        params.push(xss(req.query.category));
+    }
+
+    if (req.query.brand) {
+        query += " AND Products.brand_id = ?";
+        params.push(xss(req.query.brand));
+    }
+
+    if (req.query.seller) {
+        query += " AND Product_Sellers.seller_id = ?";
+        params.push(xss(req.query.seller));
+    }
+
+    if (req.query.minPrice) {
+        query += " AND Product_Sellers.price >= ?";
+        params.push(xss(req.query.minPrice));
+    }
+
+    if (req.query.maxPrice) {
+        query += " AND Product_Sellers.price <= ?";
+        params.push(xss(req.query.maxPrice));
+    }
+
+    const stmt = db.prepare(query);
+    const results = stmt.all(...params);
+
     res.json(results);
 });
 
