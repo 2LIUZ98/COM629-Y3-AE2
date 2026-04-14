@@ -8,7 +8,11 @@ searchRouter.get('/products', (req, res) => {
         SELECT Products.*, Product_Sellers.price, Product_Sellers.seller_id
         FROM Products
         LEFT JOIN Product_Sellers
-        ON Products.Product_ID = Product_Sellers.Product_ID
+            ON Products.Product_ID = Product_Sellers.Product_ID
+        LEFT JOIN Product_Tags 
+            ON Products.Product_ID = Product_Tags.Product_ID
+        LEFT JOIN Product_Attributes 
+            ON Products.Product_ID = Product_Attributes.Product_ID
         WHERE 1=1
     `;
 
@@ -43,6 +47,17 @@ searchRouter.get('/products', (req, res) => {
         query += " AND Product_Sellers.price <= ?";
         params.push(xss(req.query.maxPrice));
     }
+
+    if (req.query.tag) {
+        query += "AND Products.Product_ID IN (SELECT Product_ID FROM Product_Tags WHERE tag_id = ?)";
+        params.push(xss(req.query.tag));
+    }
+
+    if (req.query.attribute && req.query.value) {
+         query += "AND Products.Product_ID IN (SELECT Product_ID FROM Product_Attributes WHERE WHERE attribute_id = ? AND value = ?)";
+        params.push(xss(req.query.attribute));
+        params.push(xss(req.query.value));
+}
 
     const stmt = db.prepare(query);
     const results = stmt.all(...params);
