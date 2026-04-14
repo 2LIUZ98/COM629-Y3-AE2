@@ -5,16 +5,22 @@ import xss from 'xss';
 
 searchRouter.get('/products', (req, res) => {
     let query = `
-        SELECT Products.*, Product_Sellers.price, Product_Sellers.seller_id
-        FROM Products
-        LEFT JOIN Product_Sellers
-            ON Products.Product_ID = Product_Sellers.Product_ID
-        LEFT JOIN Product_Tags 
-            ON Products.Product_ID = Product_Tags.Product_ID
-        LEFT JOIN Product_Attributes 
-            ON Products.Product_ID = Product_Attributes.Product_ID
-        WHERE 1=1
-    `;
+    SELECT DISTINCT
+        Products.*, 
+        Product_Sellers.price, 
+        Product_Sellers.seller_id,
+        Sellers.seller_name
+    FROM Products
+    LEFT JOIN Product_Sellers
+        ON Products.Product_ID = Product_Sellers.Product_ID
+    LEFT JOIN Sellers
+        ON Sellers.Seller_ID = Product_Sellers.Seller_ID
+    LEFT JOIN Product_Tags 
+        ON Products.Product_ID = Product_Tags.Product_ID
+    LEFT JOIN Product_Attributes 
+        ON Products.Product_ID = Product_Attributes.Product_ID
+    WHERE 1=1
+`;
 
     let params = [];
 

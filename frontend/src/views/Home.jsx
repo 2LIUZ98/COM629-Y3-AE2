@@ -72,7 +72,7 @@ export default function HomePage() {
         <div key={i} style={{ border: "1px solid #ccc", margin: 10, padding: 10 }}>
           <h3>{p.product_name}</h3>
           <p>£{p.price ?? "N/A"}</p>
-          <p>£{p.seller_name ?? "N/A"}</p>
+          <p>{p.seller_name ?? "N/A"}</p>
         </div>
       ))}
     </div>
