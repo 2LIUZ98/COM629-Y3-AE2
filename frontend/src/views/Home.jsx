@@ -2,58 +2,56 @@ import { useEffect, useState } from "react";
 
 export default function ProductFeed() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-
   const [keyword, setKeyword] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const filterOptions = [
     { key: 0, title: "All", value: null },
-    { key: 1, title: "Phones", value: 1 },
-    { key: 2, title: "Laptops", value: 2 },
+    { key: 1, title: "Phones", value: 2 },
+    { key: 2, title: "Laptops", value: 1 },
     { key: 3, title: "Accessories", value: 3 },
   ];
 
-  const buildQuery = () => {
-    const params = new URLSearchParams();
-
-    if (keyword) params.append("keyword", keyword);
-    if (selectedCategory) params.append("category", selectedCategory);
-    if (minPrice) params.append("minPrice", minPrice);
-    if (maxPrice) params.append("maxPrice", maxPrice);
-
-    return params.toString();
-  };
-
   const fetchProducts = async () => {
+    setLoading(true);
+
+    let url = "http://localhost:3000/search/products";
+    let params = [];
+
+    if (keyword !== "") {
+      params.push("keyword=" + keyword);
+    }
+
+    if (selectedCategory !== null) {
+      params.push("category=" + selectedCategory);
+    }
+
+    if (minPrice !== "") {
+      params.push("minPrice=" + minPrice);
+    }
+
+    if (maxPrice !== "") {
+      params.push("maxPrice=" + maxPrice);
+    }
+
+    if (params.length > 0) {
+      url += "?" + params.join("&");
+    }
+
     try {
-      setLoading(true);
-
-      const query = buildQuery();
-      const url = `http://localhost:3000/search/products${
-        query ? `?${query}` : ""
-      }`;
-
       const res = await fetch(url);
       const data = await res.json();
 
-      setProducts(Array.isArray(data) ? data : []);
-    } catch (err) {
-      console.error("Fetch error:", err);
+      setProducts(data); 
+    } catch (e) {
+      console.log(e);
       setProducts([]);
-    } finally {
-      setLoading(false);
     }
-  };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const handleFilter = async (categoryValue) => {
-    setSelectedCategory(categoryValue);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -64,98 +62,83 @@ export default function ProductFeed() {
     <div style={{ padding: 20 }}>
       <h1>Product Search</h1>
 
-      <div style={{ marginBottom: 15 }}>
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") fetchProducts();
-          }}
-          style={{ padding: 8, width: 250 }}
-        />
+      <input
+        type="text"
+        placeholder="Search..."
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            fetchProducts();
+          }
+        }}
+      />
 
-        <button onClick={fetchProducts} style={{ marginLeft: 10 }}>
-          Search
-        </button>
+      <button onClick={fetchProducts}>Search</button>
+
+      <div style={{ marginTop: 10 }}>
+        {filterOptions.map((f) => {
+          return (
+            <button
+              key={f.key}
+              onClick={() => setSelectedCategory(f.value)}
+              style={{
+                marginRight: 5,
+                background: selectedCategory === f.value ? "black" : "gray",
+                color: "white",
+              }}
+            >
+              {f.title}
+            </button>
+          );
+        })}
       </div>
 
-      <div style={{ marginBottom: 15 }}>
-        {filterOptions.map((f) => (
-          <button
-            key={f.key}
-            onClick={() => handleFilter(f.value)}
-            style={{
-              marginRight: 10,
-              padding: "6px 12px",
-              background:
-                selectedCategory === f.value ? "#333" : "#ddd",
-              color:
-                selectedCategory === f.value ? "#fff" : "#000",
-            }}
-          >
-            {f.title}
-          </button>
-        ))}
-      </div>
-
-      <div style={{ marginBottom: 15 }}>
+      <div style={{ marginTop: 10 }}>
         <input
           type="number"
-          placeholder="Min Price"
+          placeholder="Min"
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
-          style={{ padding: 5, marginRight: 10 }}
         />
 
         <input
           type="number"
-          placeholder="Max Price"
+          placeholder="Max"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
-          style={{ padding: 5, marginRight: 10 }}
         />
 
-        <button onClick={fetchProducts}>Apply Price</button>
+        <button onClick={fetchProducts}>Apply</button>
       </div>
 
-      <div style={{ marginBottom: 20 }}>
-        <button
-          onClick={() => {
-            setKeyword("");
-            setSelectedCategory(null);
-            setMinPrice("");
-            setMaxPrice("");
-            fetchProducts();
-          }}
-        >
-          Reset Filters
-        </button>
-      </div>
+      <button
+        onClick={() => {
+          setKeyword("");
+          setSelectedCategory(null);
+          setMinPrice("");
+          setMaxPrice("");
+        }}
+        style={{ marginTop: 10 }}
+      >
+        Reset
+      </button>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+      {loading && <p>Loading...</p>}
+
+      {!loading && (
         <div>
-          {products.length === 0 ? (
-            <p>No results found</p>
-          ) : (
-            products.map((p, i) => (
-              <div
-                key={i}
-                style={{
-                  border: "1px solid #ccc",
-                  marginBottom: 10,
-                  padding: 10,
-                }}
-              >
+          {products.length === 0 && <p>No results</p>}
+
+          {products.map((p, i) => {
+            return (
+              <div key={i} style={{ border: "1px solid #ccc", marginTop: 10 }}>
                 <h3>{p.product_name}</h3>
-                <p>Price: £{p.price ?? "N/A"}</p>
-                <p>Seller: {p.seller_name ?? "N/A"}</p>
+                <p>£{p.price}</p>
+                <p>{p.seller_name}</p>
               </div>
-            ))
-          )}
+            );
+          })}
         </div>
       )}
     </div>
