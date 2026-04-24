@@ -60,7 +60,7 @@ searchRouter.get('/products', (req, res) => {
     }
 
     if (req.query.attribute && req.query.value) {
-         query += "AND Products.Product_ID IN (SELECT Product_ID FROM Product_Attributes WHERE WHERE attribute_id = ? AND value = ?)";
+         query += "AND Products.Product_ID IN (SELECT Product_ID FROM Product_Attributes WHERE attribute_id = ? AND value = ?)";
         params.push(xss(req.query.attribute));
         params.push(xss(req.query.value));
 }
