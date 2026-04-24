@@ -1,6 +1,7 @@
 import Database from "better-sqlite3";
-import dotenv from "dotenv";
+import path from "path";
 
-dotenv.config();
-const db = new Database(process.env.DB_DBASE);
+const db = new Database(path.join(process.cwd(), "dissertation.db"));
+console.log("DB PATH WORKING");
+
 export default db;
