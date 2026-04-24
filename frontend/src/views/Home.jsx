@@ -86,7 +86,7 @@ export default function ProductFeed() {
               style={{
                 marginRight: 5,
                 background: selectedCategory === f.value ? "black" : "gray",
-                color: "white",
+                color: "#05339C",
               }}
             >
               {f.title}
