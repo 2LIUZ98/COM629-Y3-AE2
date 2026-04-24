@@ -71,4 +71,7 @@ searchRouter.get('/products', (req, res) => {
     res.json(results);
 });
 
+console.log("QUERY:", query);
+console.log("PARAMS:", params);
+
 export default searchRouter;
