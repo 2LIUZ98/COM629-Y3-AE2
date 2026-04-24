@@ -32,4 +32,4 @@ allRouter.get('/marketplaces', (req, res) => {
     res.json(results);
 });
 
- 
+export default allRouter;
