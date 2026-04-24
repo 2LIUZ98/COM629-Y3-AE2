@@ -63,15 +63,17 @@ searchRouter.get('/products', (req, res) => {
          query += " AND Products.Product_ID IN (SELECT Product_ID FROM Product_Attributes WHERE attribute_id = ? AND value = ?)";
         params.push(xss(req.query.attribute));
         params.push(xss(req.query.value));
-}
+    }
 
     const stmt = db.prepare(query);
     const results = stmt.all(...params);
 
+    console.log("QUERY:", query);
+    console.log("PARAMS:", params);
+
     res.json(results);
 });
 
-console.log("QUERY:", query);
-console.log("PARAMS:", params);
+
 
 export default searchRouter;
