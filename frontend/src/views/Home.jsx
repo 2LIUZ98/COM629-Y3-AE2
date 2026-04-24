@@ -82,10 +82,10 @@ export default function ProductFeed() {
           return (
             <button
               key={f.key}
-              onClick={() => setSelectedCategory(f.value)}
+              onClick={() => setSelectedCategory(f.title)}
               style={{
                 marginRight: 5,
-                background: selectedCategory === f.value ? "black" : "gray",
+                background: selectedCategory === f.title ? "black" : "gray",
                 color: "#05339C",
               }}
             >
