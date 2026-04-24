@@ -61,6 +61,7 @@ export default function ProductFeed() {
   return (
     <div style={{ padding: 20 }}>
       <h1>Product Search</h1>
+      <h2 className="sr-only">Search results</h2>
 
       <input
         type="text"
