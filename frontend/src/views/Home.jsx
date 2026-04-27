@@ -123,12 +123,13 @@ const rateNumber =
       })}
     </div>
 
-      <div style={{ marginTop: 10 }}>
+      <div className="mt-4 flex gap-2 items-center">
         <input
           type="number"
           placeholder="Min"
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
+          className="border border-gray-300 rounded px-3 py-2 w-28 focus:outline-none focus:ring-2 focus:ring-[#05339C]"
         />
 
         <input
@@ -136,9 +137,15 @@ const rateNumber =
           placeholder="Max"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
+          className="border border-gray-300 rounded px-3 py-2 w-28 focus:outline-none focus:ring-2 focus:ring-[#05339C]"
         />
 
-        <button onClick={fetchProducts}>Apply</button>
+        <button
+          onClick={fetchProducts}
+          className="bg-[#05339C] text-white px-4 py-2 rounded hover:opacity-90 transition"
+        >
+          Apply
+        </button>
       </div>
 
       <button
