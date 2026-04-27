@@ -45,7 +45,7 @@ export default function ProductFeed() {
       const res = await fetch(url);
       const data = await res.json();
 
-      setProducts(data); 
+      setProducts(Array.isArray(data) ? data : []);
     } catch (e) {
       console.log(e);
       setProducts([]);
@@ -59,17 +59,17 @@ export default function ProductFeed() {
   }, [selectedCategory]);
 
   const rating =
-  products.length > 0
+  Array.isArray(products) && products.length > 0
     ? (
         products.reduce((sum, p) => sum + (p.avg_rate || 0), 0) /
         products.length
       ).toFixed(1)
     : null;
 
-const rateNumber = products.reduce(
-  (sum, p) => sum + (p.c_rate || 0),
-  0
-);
+const rateNumber =
+  Array.isArray(products)
+    ? products.reduce((sum, p) => sum + (p.c_rate || 0), 0)
+    : 0;
 
   return (
     <div style={{ padding: 20 }}>
