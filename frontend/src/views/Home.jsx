@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export default function ProductFeed() {
   const [products, setProducts] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [tags, setTags] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
