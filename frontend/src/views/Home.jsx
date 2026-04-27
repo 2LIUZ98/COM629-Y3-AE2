@@ -90,23 +90,28 @@ const rateNumber =
 
       <button onClick={fetchProducts}>Search</button>
 
-      <div style={{ marginTop: 10 }}>
+    <div className="mt-4">
         {filterOptions.map((f) => {
-          return (
-            <button
-              key={f.key}
-              onClick={() => setSelectedCategory(f.value)}
-              style={{
-                marginRight: 5,
-                background: selectedCategory === f.title ? "black" : "gray",
-                color: "#05339C",
-              }}
-            >
-              {f.title}
-            </button>
-          );
-        })}
-      </div>
+        const isSelected = selectedCategory === f.value;
+        return (
+        <button
+          key={f.key}
+          onClick={() => setSelectedCategory(f.value)}
+          className={`
+            mr-2 px-3 py-1 border rounded
+                border-[#05339C]
+                transition
+                ${isSelected
+                  ? "bg-white text-[#05339C]"
+                : "bg-[#05339C] text-white hover:opacity-80"
+                }
+               `}
+         >
+        {f.title}
+      </button>
+        );
+      })}
+    </div>
 
       <div style={{ marginTop: 10 }}>
         <input
