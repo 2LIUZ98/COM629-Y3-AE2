@@ -85,7 +85,7 @@ export default function ProductFeed() {
   useEffect(() => {
     fetchTags()
     fetchProducts();
-  }, [selectedCategory]);
+  }, [selectedCategory, minPrice, maxPrice, selectedTags]);
 
   const rating =
   Array.isArray(products) && products.length > 0
@@ -209,7 +209,6 @@ const rateNumber =
             onApply={fetchProducts}
             onReset={() => {
               setSelectedTags([]);
-              fetchProducts();
             }}
           />
         </div>
