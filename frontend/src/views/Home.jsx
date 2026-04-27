@@ -95,7 +95,7 @@ const rateNumber =
           return (
             <button
               key={f.key}
-              onClick={() => setSelectedCategory(f.title)}
+              onClick={() => setSelectedCategory(f.value)}
               style={{
                 marginRight: 5,
                 background: selectedCategory === f.title ? "black" : "gray",
