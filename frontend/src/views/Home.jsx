@@ -162,25 +162,36 @@ const rateNumber =
         Reset
       </button>
 
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <p className="mt-4 text-gray-600">Loading...</p>
+      )}
 
       {!loading && (
-        <div>
-          {products.length === 0 && <p>No results</p>}
-          
+        <div className="mt-4">
+          {products.length === 0 && (
+            <p className="text-gray-500">No results</p>
+          )}
+
           {products.length > 0 && (
-           <>
-            <p>⭐ {rating ?? "No rating"}</p>
-            <p>{rateNumber} reviews</p>
-          </>
+            <div className="mb-4">
+              <p className="text-[#05339C] font-semibold">
+                ⭐ {rating ?? "No rating"}
+              </p>
+              <p className="text-gray-600 text-sm">
+                {rateNumber} reviews
+              </p>
+            </div>
           )}
 
           {products.map((p, i) => {
             return (
-              <div key={i} style={{ border: "1px solid #ccc", marginTop: 10 }}>
-                <h3>{p.product_name}</h3>
-                <p>£{p.price}</p>
-                <p>{p.seller_name}</p>
+              <div
+                key={i}
+                className="border border-gray-200 rounded p-3 mt-3 hover:shadow-sm transition"
+              >
+                <h3 className="font-semibold text-lg">{p.product_name}</h3>
+                <p className="text-gray-800">£{p.price}</p>
+                <p className="text-gray-500 text-sm">{p.seller_name}</p>
               </div>
             );
           })}
