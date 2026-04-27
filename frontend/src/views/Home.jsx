@@ -73,36 +73,9 @@ const rateNumber =
     ? products.reduce((sum, p) => sum + (p.c_rate || 0), 0)
     : 0;
 
-  return (
-    <div className="p-5">
-    <h1 className="text-2xl font-bold">Product Search</h1>
-
-    <h2 className="sr-only">Search results</h2>
-
-      <div className="mt-4 flex gap-2">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              fetchProducts();
-            }
-          }}
-          className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none"
-        />
-
-        <button
-          onClick={fetchProducts}
-          className="bg-[#05339C] text-white px-4 py-2 rounded hover:opacity-90 transition"
-        >
-          Search
-        </button>
-      </div>
-
-
-    <div className="w-64 flex-shrink-0">
+    return (
+    <div className="p-5 flex gap-6">
+      <div className="w-64 flex-shrink-0">
         <h2 className="font-semibold mb-2">Filters</h2>
 
         <div className="mb-4">
@@ -153,6 +126,35 @@ const rateNumber =
           </button>
         </div>
       </div>
+
+  
+      <div className="flex-1">
+
+        <h1 className="text-2xl font-bold">Product Search</h1>
+
+        <h2 className="sr-only">Search results</h2>
+
+      <div className="mt-4 flex gap-2">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              fetchProducts();
+            }
+          }}
+          className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none"
+        />
+
+        <button
+          onClick={fetchProducts}
+          className="bg-[#05339C] text-white px-4 py-2 rounded hover:opacity-90 transition"
+        >
+          Search
+        </button>
+      </div>
       
       <button
         onClick={() => {
@@ -188,20 +190,20 @@ const rateNumber =
             </div>
           )}
 
-          {products.map((p, i) => {
-            return (
-              <div
-                key={i}
-                className="border border-gray-200 rounded p-3 mt-3 hover:shadow-sm transition"
-              >
-                <h3 className="font-semibold text-lg">{p.product_name}</h3>
-                <p className="text-gray-800">£{p.price}</p>
-                <p className="text-gray-500 text-sm">{p.seller_name}</p>
-              </div>
-            );
-          })}
+          {products.map((p, i) => (
+            <div
+              key={i}
+              className="border border-gray-200 rounded p-3 mt-3 hover:shadow-sm transition"
+            >
+              <h3 className="font-semibold text-lg">{p.product_name}</h3>
+              <p className="text-gray-800">£{p.price}</p>
+              <p className="text-gray-500 text-sm">{p.seller_name}</p>
+            </div>
+          ))}
         </div>
       )}
+
     </div>
-  );
+  </div>
+);
 }
