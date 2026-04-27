@@ -5,7 +5,7 @@ import xss from 'xss';
 
 searchRouter.get('/products', (req, res) => {
     let query = `
-    SELECT DISTINCT
+    SELECT
         Products.*, 
         Product_Sellers.price, 
         Product_Sellers.seller_id,
@@ -68,6 +68,12 @@ searchRouter.get('/products', (req, res) => {
         params.push(xss(req.query.attribute));
         params.push(xss(req.query.value));
     }
+
+    query += `
+            GROUP BY 
+            Products.Product_ID,
+            Product_Sellers.seller_id
+            `;
 
     const stmt = db.prepare(query);
     const results = stmt.all(...params);
