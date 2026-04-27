@@ -81,9 +81,10 @@ const rateNumber =
     </h1>
 
     <div className="flex gap-6">
+      <h2 className="font-semibold mb-2">Filters</h2>
 
       <div className="w-64 flex-shrink-0">
-        <h2 className="font-semibold mb-2">Filters</h2>
+        <h2 className="font-semibold mb-2">Categories</h2>
 
         <div className="mb-4">
           {filterOptions.map((f) => {
@@ -111,6 +112,7 @@ const rateNumber =
         
 
         <div className="flex flex-col gap-2">
+          <h2 className="font-semibold mb-2">Price</h2>
           <input
             type="number"
             placeholder="Min"
