@@ -205,7 +205,13 @@ const rateNumber =
               );
             })}
           </div>
-          <ApplyButton onClick={fetchProducts} />
+          <ActionButtons
+            onApply={fetchProducts}
+            onReset={() => {
+              setSelectedTags([]);
+              fetchProducts();
+            }}
+          />
         </div>
       </div>
 
