@@ -173,7 +173,7 @@ const rateNumber =
             <p className="text-gray-500">No results</p>
           )}
 
-          {products.length > 0 && (
+          {hasSearched && products.length > 0 && (
             <div className="mb-4">
               <p className="text-[#05339C] font-semibold">
                 ⭐ {rating ?? "No rating"}
