@@ -111,6 +111,23 @@ const rateNumber =
       <h2 className="font-semibold mb-2">Filters</h2>
 
       <div className="w-64 flex-shrink-0">
+        <div className="mb-4">
+          <button
+            onClick={() => {
+              setKeyword("");
+              setSelectedCategory(null);
+              setMinPrice("");
+              setMaxPrice("");
+              setSelectedTags([]);
+              fetchProducts();
+            }}
+            className="w-full bg-white text-[#05339C] px-3 py-2 rounded border border-[#05339C] 
+                      transition hover:bg-[#05339C] hover:text-white"
+          >
+            Reset All Filters
+          </button>
+        </div>
+
         <h2 className="font-semibold mb-2">Categories</h2>
 
         <div className="mb-4">
