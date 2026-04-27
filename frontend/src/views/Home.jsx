@@ -109,8 +109,6 @@ const rateNumber =
           })}
         </div>
 
-        
-
         <div className="flex flex-col gap-2">
           <h2 className="font-semibold mb-2">Price</h2>
           <input
@@ -128,7 +126,36 @@ const rateNumber =
             onChange={(e) => setMaxPrice(e.target.value)}
             className="border border-gray-300 rounded px-3 py-2"
           />
+        </div>
 
+        <div className="flex flex-col gap-2">
+          <h2 className="font-semibold mb-2">Tags</h2>
+            <div className="mb-4 flex flex-col gap-2">
+              {filterOptions.map((f) => {
+                const isChecked = selectedTags.includes(f.value);
+
+                return (
+                  <label
+                    key={f.key}
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={isChecked}
+                      onChange={() => toggleTag(f.value)}
+                      className="accent-[#05339C] w-4 h-4"
+                    />
+
+                    <span className="text-[#05339C]">
+                      {f.title}
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
           <button
             onClick={fetchProducts}
             className="bg-[#05339C] text-white px-4 py-2 rounded border border-[#05339C] transition hover:bg-white hover:text-[#05339C]"
