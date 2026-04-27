@@ -15,6 +15,8 @@ searchRouter.get('/products', (req, res) => {
         ON Products.Product_ID = Product_Sellers.Product_ID
     LEFT JOIN Sellers
         ON Sellers.Seller_ID = Product_Sellers.Seller_ID
+    LEFT JOIN Rating 
+        ON Products.Product_ID = Rating.Product_ID
     LEFT JOIN Product_Tags 
         ON Products.Product_ID = Product_Tags.Product_ID
     LEFT JOIN Product_Attributes 
