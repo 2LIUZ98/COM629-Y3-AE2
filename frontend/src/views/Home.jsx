@@ -149,6 +149,8 @@ const rateNumber =
             onChange={(e) => setMaxPrice(e.target.value)}
             className="border border-gray-300 rounded px-3 py-2"
           />
+
+          <ApplyButton onClick={fetchProducts} />
         </div>
 
         <div className="flex flex-col gap-2">
@@ -176,15 +178,7 @@ const rateNumber =
               );
             })}
           </div>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <button
-            onClick={fetchProducts}
-            className="bg-[#05339C] text-white px-4 py-2 rounded border border-[#05339C] transition hover:bg-white hover:text-[#05339C]"
-          >
-            Apply
-          </button>
+          <ApplyButton onClick={fetchProducts} />
         </div>
       </div>
 
