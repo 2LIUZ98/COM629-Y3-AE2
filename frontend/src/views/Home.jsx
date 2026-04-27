@@ -7,6 +7,7 @@ export default function ProductFeed() {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [loading, setLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const filterOptions = [
     { key: 0, title: "All", value: null },
@@ -164,7 +165,7 @@ const rateNumber =
       {loading && <p>Loading...</p>}
 
       {!loading && (
-        <div>ytre
+        <div>
           {products.length === 0 && <p>No results</p>}
           
           {products.length > 0 && (
