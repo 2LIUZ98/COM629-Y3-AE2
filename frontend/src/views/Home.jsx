@@ -152,29 +152,29 @@ const rateNumber =
 
         <div className="flex flex-col gap-2">
           <h2 className="font-semibold mb-2">Tags</h2>
-            <div className="mb-4 flex flex-col gap-2">
-              {filterOptions.map((f) => {
-                const isChecked = selectedTags.includes(f.value);
+          <div className="mb-4 flex flex-col gap-2">
+            {tags.map((tag) => {
+              const isChecked = selectedTags.includes(tag.tag_id);
 
-                return (
-                  <label
-                    key={f.key}
-                    className="flex items-center gap-2 cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={isChecked}
-                      onChange={() => checkTag(f.value)}
-                      className="accent-[#05339C] w-4 h-4"
-                    />
+              return (
+                <label
+                  key={tag.tag_id}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={() => toggleTag(tag.tag_id)}
+                    className="accent-[#05339C] w-4 h-4"
+                  />
 
-                    <span className="text-[#05339C]">
-                      {f.title}
-                    </span>
-                  </label>
-                );
-              })}
-            </div>
+                  <span className="text-[#05339C]">
+                    {tag.tag_name}
+                  </span>
+                </label>
+              );
+            })}
+          </div>
         </div>
 
         <div className="flex flex-col gap-2">
