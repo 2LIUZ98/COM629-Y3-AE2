@@ -74,10 +74,13 @@ const rateNumber =
     : 0;
 
     return (
-    <div className="p-5 flex gap-6">
-      <h1 className="text-2xl font-bold">
+  <div className="p-5 flex flex-col gap-6">
+    <h1 className="text-2xl font-bold">
       Product Search
-      </h1>
+    </h1>
+
+    <div className="flex gap-6">
+
       <div className="w-64 flex-shrink-0">
         <h2 className="font-semibold mb-2">Filters</h2>
 
@@ -130,83 +133,78 @@ const rateNumber =
         </div>
       </div>
 
-  
       <div className="flex-1">
-
-        <h1 className="text-2xl font-bold">Product Search</h1>
 
         <h2 className="sr-only">Search results</h2>
 
-      <div className="mt-4 flex gap-2">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              fetchProducts();
-            }
-          }}
-          className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none"
-        />
+        <div className="mt-4 flex gap-2">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") fetchProducts();
+            }}
+            className="flex-1 border border-gray-300 rounded px-3 py-2"
+          />
+
+          <button
+            onClick={fetchProducts}
+            className="bg-[#05339C] text-white px-4 py-2 rounded"
+          >
+            Search
+          </button>
+        </div>
 
         <button
-          onClick={fetchProducts}
-          className="bg-[#05339C] text-white px-4 py-2 rounded hover:opacity-90 transition"
+          onClick={() => {
+            setKeyword("");
+            setSelectedCategory(null);
+            setMinPrice("");
+            setMaxPrice("");
+            fetchProducts();
+          }}
+          className="mt-4 bg-gray-200 text-[#05339C] px-4 py-2 rounded border border-[#05339C]"
         >
-          Search
+          Reset
         </button>
-      </div>
-      
-      <button
-        onClick={() => {
-          setKeyword("");
-          setSelectedCategory(null);
-          setMinPrice("");
-          setMaxPrice("");
-          fetchProducts()
-        }}
-        className="mt-4 bg-gray-200 text-[#05339C] px-4 py-2 rounded border border-[#05339C] hover:bg-gray-300 transition"
-      >
-        Reset
-      </button>
 
-      {loading && (
-        <p className="mt-4 text-gray-600">Loading...</p>
-      )}
-
-      {!loading && (
         <div className="mt-4">
-          {products.length === 0 && (
-            <p className="text-gray-500">No results</p>
-          )}
+          {loading && <p>Loading...</p>}
 
-          {hasSearched && products.length > 0 && (
-            <div className="mb-4">
-              <p className="text-[#05339C] font-semibold">
-                ⭐ {rating ?? "No rating"}
-              </p>
-              <p className="text-gray-600 text-sm">
-                {rateNumber} reviews
-              </p>
-            </div>
-          )}
+          {!loading && (
+            <>
+              {products.length === 0 && (
+                <p className="text-gray-500">No results</p>
+              )}
 
-          {products.map((p, i) => (
-            <div
-              key={i}
-              className="border border-gray-200 rounded p-3 mt-3 hover:shadow-sm transition"
-            >
-              <h3 className="font-semibold text-lg">{p.product_name}</h3>
-              <p className="text-gray-800">£{p.price}</p>
-              <p className="text-gray-500 text-sm">{p.seller_name}</p>
-            </div>
-          ))}
+              {hasSearched && products.length > 0 && (
+                <div className="mb-4">
+                  <p className="text-[#05339C] font-semibold">
+                    ⭐ {rating ?? "No rating"}
+                  </p>
+                  <p className="text-gray-600 text-sm">
+                    {rateNumber} reviews
+                  </p>
+                </div>
+              )}
+
+              {products.map((p, i) => (
+                <div
+                  key={i}
+                  className="border border-gray-200 rounded p-3 mt-3"
+                >
+                  <h3 className="font-semibold text-lg">{p.product_name}</h3>
+                  <p>£{p.price}</p>
+                  <p className="text-gray-500 text-sm">{p.seller_name}</p>
+                </div>
+              ))}
+            </>
+          )}
         </div>
-      )}
 
+      </div>
     </div>
   </div>
-);
-}
+);}
