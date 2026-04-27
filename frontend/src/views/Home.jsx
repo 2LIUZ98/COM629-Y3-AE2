@@ -23,8 +23,19 @@ export default function ProductFeed() {
     prev.includes(value)
       ? prev.filter((v) => v !== value)
       : [...prev, value]
-  );
-};
+    );
+  };
+
+  const fetchTags = async () => {
+    try {
+      const res = await fetch("https://com629-y3-ae2.onrender.com/all/tags");
+      const data = await res.json();
+      setTags(Array.isArray(data) ? data : []);
+    } catch (err) {
+      console.error(err);
+      setTags([]);
+    }
+  };
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -67,6 +78,7 @@ export default function ProductFeed() {
   };
 
   useEffect(() => {
+    fetchTags()
     fetchProducts();
   }, [selectedCategory]);
 
