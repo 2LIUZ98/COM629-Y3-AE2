@@ -154,7 +154,7 @@ const rateNumber =
 
           <button
             onClick={fetchProducts}
-            className="bg-[#05339C] text-white px-4 py-2 rounded"
+            className="bg-[#05339C] text-white px-4 py-2 rounded border border-[#05339C] transition hover:bg-white hover:text-[#05339C]"
           >
             Search
           </button>
