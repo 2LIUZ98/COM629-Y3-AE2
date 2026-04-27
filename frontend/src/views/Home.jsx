@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ApplyButton from "../components/filterApplyButton";
+import ActionButton from "../components/filterApplyButton";
 
 export default function ProductFeed() {
   const [products, setProducts] = useState([]);
@@ -171,7 +171,13 @@ const rateNumber =
             className="border border-gray-300 rounded px-3 py-2"
           />
 
-          <ApplyButton onClick={fetchProducts} />
+          <ActionButtons
+            onApply={fetchProducts}
+            onReset={() => {
+              setMinPrice("");
+              setMaxPrice("");
+            }}
+          />
         </div>
 
         <div className="flex flex-col gap-2">
