@@ -18,6 +18,7 @@ export default function ProductFeed() {
 
   const fetchProducts = async () => {
     setLoading(true);
+    setHasSearched(true);
 
     let url = "https://com629-y3-ae2.onrender.com/search/products";
     let params = [];
