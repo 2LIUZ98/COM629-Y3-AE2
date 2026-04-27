@@ -168,7 +168,7 @@ const rateNumber =
             setMaxPrice("");
             fetchProducts();
           }}
-          className="mt-4 bg-gray-200 text-[#05339C] px-4 py-2 rounded border border-[#05339C]"
+          className="mt-4 bg-white-200 text-[#05339C] px-4 py-2 rounded border border-[#05339C]"
         >
           Reset
         </button>
