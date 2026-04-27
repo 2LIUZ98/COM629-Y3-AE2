@@ -61,6 +61,10 @@ export default function ProductFeed() {
       params.push("maxPrice=" + maxPrice);
     }
 
+    if (selectedTags.length > 0) {
+      params.push("tags=" + selectedTags.join(","));
+    }
+
     if (params.length > 0) {
       url += "?" + params.join("&");
     }
