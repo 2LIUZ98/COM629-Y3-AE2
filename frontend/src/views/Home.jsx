@@ -75,6 +75,9 @@ const rateNumber =
 
     return (
     <div className="p-5 flex gap-6">
+      <h1 className="text-2xl font-bold">
+      Product Search
+      </h1>
       <div className="w-64 flex-shrink-0">
         <h2 className="font-semibold mb-2">Filters</h2>
 
