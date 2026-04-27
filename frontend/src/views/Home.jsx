@@ -164,7 +164,7 @@ const rateNumber =
                   <input
                     type="checkbox"
                     checked={isChecked}
-                    onChange={() => toggleTag(tag.tag_id)}
+                    onChange={() => checkTag(tag.tag_id)}
                     className="accent-[#05339C] w-4 h-4"
                   />
 
