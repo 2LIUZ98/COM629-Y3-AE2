@@ -17,6 +17,14 @@ export default function ProductFeed() {
     { key: 3, title: "Accessories", value: 3 },
   ];
 
+  const checkTag = (value) => {
+  setSelectedTags((prev) =>
+    prev.includes(value)
+      ? prev.filter((v) => v !== value)
+      : [...prev, value]
+  );
+};
+
   const fetchProducts = async () => {
     setLoading(true);
     setHasSearched(true);
@@ -143,7 +151,7 @@ const rateNumber =
                     <input
                       type="checkbox"
                       checked={isChecked}
-                      onChange={() => toggleTag(f.value)}
+                      onChange={() => checkTag(f.value)}
                       className="accent-[#05339C] w-4 h-4"
                     />
 
