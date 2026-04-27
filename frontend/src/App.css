@@ -24,24 +24,14 @@ textarea {
   resize: vertical;
 }
 
-.image-upload {
-  border: 2px dashed #dee2e6;
-  border-radius: 16px;
-  padding: 60px 20px;
-  text-align: center;
+button {
+  font-family: inherit;
+  font-size: 15px;
   cursor: pointer;
   transition: all 0.2s;
-  background: #f8f9fa;
 }
 
-.custom-input-div {
-  border-radius: 15px !important;
-  border: 2px solid #ff6b6b !important;
-  width: fit-content;
-  padding: 5px 10px;
+button {
+  color: inherit;
 }
 
-.custom-input-input {
-  border: none !important;
-  outline: none !important;
-}
