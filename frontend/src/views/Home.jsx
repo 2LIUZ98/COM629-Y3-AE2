@@ -97,8 +97,8 @@ const rateNumber =
                   block w-full mb-2 px-3 py-1 border rounded
                   border-[#05339C] transition
                   ${isSelected
-                    ? "bg-white text-[#05339C]"
-                    : "bg-[#05339C] text-white hover:opacity-80"
+                    ? "bg-[#05339C] text-white"
+                    : "bg-white text-[#05339C] hover:bg-gray-100"
                   }
                 `}
               >
@@ -107,6 +107,8 @@ const rateNumber =
             );
           })}
         </div>
+
+        
 
         <div className="flex flex-col gap-2">
           <input
