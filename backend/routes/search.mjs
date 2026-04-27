@@ -4,27 +4,31 @@ import db from './db.mjs';
 import xss from 'xss';
 
 searchRouter.get('/products', (req, res) => {
-    let query = `
-    SELECT
-        Products.*, 
-        Product_Sellers.price, 
-        Product_Sellers.seller_id,
-        Sellers.seller_name,
-        AVG(Rating.rating) AS avg_rate,
-        COUNT(Rating.rating) AS c_rate
-    FROM Products
-    LEFT JOIN Product_Sellers
-        ON Products.Product_ID = Product_Sellers.Product_ID
-    LEFT JOIN Sellers
-        ON Sellers.Seller_ID = Product_Sellers.Seller_ID
-    LEFT JOIN Rating 
-        ON Products.Product_ID = Rating.Product_ID
-    LEFT JOIN Product_Tags 
-        ON Products.Product_ID = Product_Tags.Product_ID
-    LEFT JOIN Product_Attributes 
-        ON Products.Product_ID = Product_Attributes.Product_ID
-    WHERE 1=1
-`;
+   let query = `
+        SELECT 
+            Products.Product_ID,
+            Products.product_name,
+            Products.category_id,
+            Products.brand_id,
+            Product_Sellers.price,
+            Product_Sellers.seller_id,
+            Sellers.seller_name,
+            AVG(Rating.rating) AS avg_rate,
+            COUNT(Rating.rating) AS c_rate
+
+        FROM Products
+        LEFT JOIN Product_Sellers
+            ON Products.Product_ID = Product_Sellers.Product_ID
+        LEFT JOIN Sellers
+            ON Sellers.Seller_ID = Product_Sellers.Seller_ID
+        LEFT JOIN Rating 
+            ON Products.Product_ID = Rating.Product_ID
+        LEFT JOIN Product_Tags 
+            ON Products.Product_ID = Product_Tags.Product_ID
+        LEFT JOIN Product_Attributes 
+            ON Products.Product_ID = Product_Attributes.Product_ID
+        WHERE 1=1
+        `;
 
     let params = [];
 
