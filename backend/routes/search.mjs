@@ -62,9 +62,9 @@ searchRouter.get('/products', (req, res) => {
         params.push(xss(req.query.maxPrice));
     }
 
-    if (req.query.tag) {
+    if (req.query.tags) {
         query += " AND Products.Product_ID IN (SELECT Product_ID FROM Product_Tags WHERE tag_id = ?)";
-        params.push(xss(req.query.tag));
+        params.push(xss(req.query.tags));
     }
 
     if (req.query.attribute && req.query.value) {
