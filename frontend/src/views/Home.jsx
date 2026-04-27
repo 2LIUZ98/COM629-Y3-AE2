@@ -131,7 +131,7 @@ const rateNumber =
           placeholder="Min"
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
-          className="border border-gray-300 rounded px-3 py-2 w-28 focus:outline-none focus:ring-2 focus:ring-[#05339C]"
+          className="border border-gray-300 rounded px-3 py-2 w-28"
         />
 
         <input
@@ -139,7 +139,7 @@ const rateNumber =
           placeholder="Max"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
-          className="border border-gray-300 rounded px-3 py-2 w-28 focus:outline-none focus:ring-2 focus:ring-[#05339C]"
+          className="border border-gray-300 rounded px-3 py-2 w-28"
         />
 
         <button
