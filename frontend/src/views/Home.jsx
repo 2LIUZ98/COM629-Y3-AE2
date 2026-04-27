@@ -72,23 +72,33 @@ const rateNumber =
     : 0;
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Product Search</h1>
-      <h2 className="sr-only">Search results</h2>
+    <div className="p-5">
+    <h1 className="text-2xl font-bold">Product Search</h1>
 
-      <input
-        type="text"
-        placeholder="Search..."
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            fetchProducts();
-          }
-        }}
-      />
+    <h2 className="sr-only">Search results</h2>
 
-      <button onClick={fetchProducts}>Search</button>
+      <div className="mt-4 flex gap-2">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              fetchProducts();
+            }
+          }}
+          className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#05339C]"
+        />
+
+        <button
+          onClick={fetchProducts}
+          className="bg-[#05339C] text-white px-4 py-2 rounded hover:opacity-90 transition"
+        >
+          Search
+        </button>
+      </div>
+
 
     <div className="mt-4">
         {filterOptions.map((f) => {
