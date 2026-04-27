@@ -102,54 +102,58 @@ const rateNumber =
       </div>
 
 
-    <div className="mt-4">
-        {filterOptions.map((f) => {
-        const isSelected = selectedCategory === f.value;
-        return (
-        <button
-          key={f.key}
-          onClick={() => setSelectedCategory(f.value)}
-          className={`
-            mr-2 px-3 py-1 border rounded
-                border-[#05339C]
-                transition
-                ${isSelected
-                  ? "bg-white text-[#05339C]"
-                : "bg-[#05339C] text-white hover:opacity-80"
-                }
-               `}
-         >
-        {f.title}
-      </button>
-        );
-      })}
-    </div>
+    <div className="w-64 flex-shrink-0">
+        <h2 className="font-semibold mb-2">Filters</h2>
 
-      <div className="mt-4 flex gap-2 items-center">
-        <input
-          type="number"
-          placeholder="Min"
-          value={minPrice}
-          onChange={(e) => setMinPrice(e.target.value)}
-          className="border border-gray-300 rounded px-3 py-2 w-28"
-        />
+        <div className="mb-4">
+          {filterOptions.map((f) => {
+            const isSelected = selectedCategory === f.value;
 
-        <input
-          type="number"
-          placeholder="Max"
-          value={maxPrice}
-          onChange={(e) => setMaxPrice(e.target.value)}
-          className="border border-gray-300 rounded px-3 py-2 w-28"
-        />
+            return (
+              <button
+                key={f.key}
+                onClick={() => setSelectedCategory(f.value)}
+                className={`
+                  block w-full mb-2 px-3 py-1 border rounded
+                  border-[#05339C] transition
+                  ${isSelected
+                    ? "bg-white text-[#05339C]"
+                    : "bg-[#05339C] text-white hover:opacity-80"
+                  }
+                `}
+              >
+                {f.title}
+              </button>
+            );
+          })}
+        </div>
 
-        <button
-          onClick={fetchProducts}
-          className="bg-[#05339C] text-white px-4 py-2 rounded hover:opacity-90 transition"
-        >
-          Apply
-        </button>
+        <div className="flex flex-col gap-2">
+          <input
+            type="number"
+            placeholder="Min"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+            className="border border-gray-300 rounded px-3 py-2"
+          />
+
+          <input
+            type="number"
+            placeholder="Max"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+            className="border border-gray-300 rounded px-3 py-2"
+          />
+
+          <button
+            onClick={fetchProducts}
+            className="bg-[#05339C] text-white px-4 py-2 rounded"
+          >
+            Apply
+          </button>
+        </div>
       </div>
-
+      
       <button
         onClick={() => {
           setKeyword("");
