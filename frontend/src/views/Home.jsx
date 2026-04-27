@@ -75,6 +75,7 @@ const rateNumber =
 
     return (
   <div className="p-5 flex flex-col gap-6">
+    
     <h1 className="text-2xl font-bold">
       Product Search
     </h1>
