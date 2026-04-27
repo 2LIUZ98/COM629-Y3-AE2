@@ -160,18 +160,31 @@ const rateNumber =
           </button>
         </div>
 
-        <button
-          onClick={() => {
-            setKeyword("");
-            setSelectedCategory(null);
-            setMinPrice("");
-            setMaxPrice("");
-            fetchProducts();
-          }}
-          className="mt-4 bg-white-200 text-[#05339C] px-4 py-2 rounded border border-[#05339C]"
-        >
-          Reset
-        </button>
+        <div className="mt-4 flex items-center justify-between">
+          <button
+            onClick={() => {
+              setKeyword("");
+              setSelectedCategory(null);
+              setMinPrice("");
+              setMaxPrice("");
+              fetchProducts();
+            }}
+            className="bg-white text-[#05339C] px-4 py-2 rounded border border-[#05339C] hover:bg-[#05339C] hover:text-white transition"
+          >
+            Reset
+          </button>
+
+          {hasSearched && products.length > 0 && (
+            <div className="text-right">
+              <p className="text-[#05339C] font-semibold">
+                ⭐ {rating ?? "No rating"}
+              </p>
+              <p className="text-gray-600 text-sm">
+                {rateNumber} reviews
+              </p>
+            </div>
+          )}
+        </div>
 
         <div className="mt-4">
           {loading && <p>Loading...</p>}
@@ -180,17 +193,6 @@ const rateNumber =
             <>
               {products.length === 0 && (
                 <p className="text-gray-500">No results</p>
-              )}
-
-              {hasSearched && products.length > 0 && (
-                <div className="mb-4">
-                  <p className="text-[#05339C] font-semibold">
-                    ⭐ {rating ?? "No rating"}
-                  </p>
-                  <p className="text-gray-600 text-sm">
-                    {rateNumber} reviews
-                  </p>
-                </div>
               )}
 
               {products.map((p, i) => (
