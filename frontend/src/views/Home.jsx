@@ -174,6 +174,10 @@ const rateNumber =
             Reset
           </button>
 
+          <p className="text-gray-600 text-sm">
+            {products.length} results
+          </p>
+
           {hasSearched && products.length > 0 && (
             <div className="text-right">
               <p className="text-[#05339C] font-semibold">
