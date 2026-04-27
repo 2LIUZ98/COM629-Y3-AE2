@@ -163,6 +163,21 @@ const rateNumber =
         </div>
 
         <div className="mt-4 flex items-center justify-between">
+          {hasSearched && products.length > 0 && (
+            <div className="text-right">
+              <p className="text-[#05339C] font-semibold">
+                ⭐ {rating ?? "No rating"}
+              </p>
+              <p className="text-gray-600 text-sm">
+                {rateNumber} reviews
+              </p>
+            </div>
+          )}
+
+          <p className="text-gray-600 text-sm">
+            {products.length} results
+          </p>
+
           <button
             onClick={() => {
               setKeyword("");
@@ -176,20 +191,6 @@ const rateNumber =
             Reset
           </button>
 
-          <p className="text-gray-600 text-sm">
-            {products.length} results
-          </p>
-
-          {hasSearched && products.length > 0 && (
-            <div className="text-right">
-              <p className="text-[#05339C] font-semibold">
-                ⭐ {rating ?? "No rating"}
-              </p>
-              <p className="text-gray-600 text-sm">
-                {rateNumber} reviews
-              </p>
-            </div>
-          )}
         </div>
 
         <div className="mt-4">
