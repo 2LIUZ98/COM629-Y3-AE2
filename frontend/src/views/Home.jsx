@@ -154,8 +154,9 @@ const rateNumber =
           setSelectedCategory(null);
           setMinPrice("");
           setMaxPrice("");
+          fetchProducts()
         }}
-        style={{ marginTop: 10 }}
+        className="mt-4 bg-gray-200 text-[#05339C] px-4 py-2 rounded border border-[#05339C] hover:bg-gray-300 transition"
       >
         Reset
       </button>
@@ -163,7 +164,7 @@ const rateNumber =
       {loading && <p>Loading...</p>}
 
       {!loading && (
-        <div>
+        <div>ytre
           {products.length === 0 && <p>No results</p>}
           
           {products.length > 0 && (
