@@ -32,4 +32,10 @@ allRouter.get('/marketplaces', (req, res) => {
     res.json(results);
 });
 
+allRouter.get('/tags', (req, res) => {
+    const stmt = db.prepare("SELECT * FROM Tags");
+    const results = stmt.all();
+    res.json(results);
+});
+
 export default allRouter;
