@@ -79,13 +79,16 @@ searchRouter.get('/products', (req, res) => {
             Product_Sellers.seller_id
             `;
 
+    try {
     const stmt = db.prepare(query);
     const results = stmt.all(...params);
-
-    console.log("QUERY:", query);
-    console.log("PARAMS:", params);
-
     res.json(results);
+} catch (err) {
+    console.error("SQL ERROR:", err.message);
+    res.status(500).json({ error: err.message });
+}
+
+  
 });
 
 
