@@ -58,6 +58,19 @@ export default function ProductFeed() {
     fetchProducts();
   }, [selectedCategory]);
 
+  const rating =
+  products.length > 0
+    ? (
+        products.reduce((sum, p) => sum + (p.avg_rate || 0), 0) /
+        products.length
+      ).toFixed(1)
+    : null;
+
+const rateNumber = products.reduce(
+  (sum, p) => sum + (p.c_rate || 0),
+  0
+);
+
   return (
     <div style={{ padding: 20 }}>
       <h1>Product Search</h1>
@@ -130,6 +143,13 @@ export default function ProductFeed() {
       {!loading && (
         <div>
           {products.length === 0 && <p>No results</p>}
+          
+          {products.length > 0 && (
+           <>
+            <p>⭐ {rating ?? "No rating"}</p>
+            <p>{rateNumber} reviews</p>
+          </>
+          )}
 
           {products.map((p, i) => {
             return (
