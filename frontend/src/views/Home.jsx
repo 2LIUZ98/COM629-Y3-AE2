@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ResetButtons from "../components/filterApplyButton";
+import ResetButton from "../components/filterApplyButton";
 
 export default function ProductFeed() {
   const [products, setProducts] = useState([]);
