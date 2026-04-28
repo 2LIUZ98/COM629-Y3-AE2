@@ -6,10 +6,10 @@ import xss from 'xss';
 searchRouter.get('/products', (req, res) => {
    let query = `
         SELECT 
-            Products.Product_ID,
-            Products.product_name,
-            Products.category_id,
-            Products.brand_id,
+            p.Product_ID,
+            p.product_name,
+            p.category_id,
+            p.brand_id,
             ps.price,
             ps_stock,
             ps.seller_id,
@@ -21,70 +21,70 @@ searchRouter.get('/products', (req, res) => {
                 FROM Product_Attributes pa
                 LEFT JOIN Attributes a
                     ON pa.attribute_id = a.attribute_id
-                WHERE pa.Product_ID = Products.Product_ID
+                WHERE pa.Product_ID = p.Product_ID
             ) AS attributes
 
-        FROM Products
+        FROM Products p
         LEFT JOIN Product_Sellers ps
-            ON Products.Product_ID = ps.Product_ID
+            ON p.Product_ID = ps.Product_ID
         LEFT JOIN Sellers s
             ON s.Seller_ID = ps.Seller_ID
         LEFT JOIN Ratings 
-            ON Products.Product_ID = Ratings.Product_ID
+            ON p.Product_ID = Ratings.Product_ID
         LEFT JOIN Product_Tags 
-            ON Products.Product_ID = Product_Tags.Product_ID   
+            ON p.Product_ID = Product_Tags.Product_ID   
         WHERE 1=1
         `;
 
     let params = [];
 
     if (req.query.keyword) {
-        query += " AND Products.product_name LIKE ?";
+        query += " AND p.product_name LIKE ?";
         params.push(`%${xss(req.query.keyword)}%`);
     }
 
     if (req.query.category) {
-        query += " AND Products.category_id = ?";
+        query += " AND p.category_id = ?";
         params.push(xss(req.query.category));
     }
 
     if (req.query.brand) {
-        query += " AND Products.brand_id = ?";
+        query += " AND p.brand_id = ?";
         params.push(xss(req.query.brand));
     }
 
     if (req.query.seller) {
-        query += " AND Product_Sellers.seller_id = ?";
+        query += " AND ps.seller_id = ?";
         params.push(xss(req.query.seller));
     }
 
      if (req.query.minPrice) {
-        query += " AND Product_Sellers.price >= ?";
+        query += " AND ps.price >= ?";
         params.push(xss(req.query.minPrice));
     }
  
 
     if (req.query.maxPrice) {
-        query += " AND Product_Sellers.price <= ?";
+        query += " AND ps.price <= ?";
         params.push(xss(req.query.maxPrice));
     }
 
 
     if (req.query.tags) {
-        query += " AND Products.Product_ID IN (SELECT Product_ID FROM Product_Tags WHERE tag_id = ?)";
+        query += " AND p.Product_ID IN (SELECT Product_ID FROM Product_Tags WHERE tag_id = ?)";
         params.push(xss(req.query.tags));
     }
 
     if (req.query.attribute && req.query.value) {
-         query += " AND Products.Product_ID IN (SELECT Product_ID FROM Product_Attributes WHERE attribute_id = ? AND value = ?)";
+         query += " AND p.Product_ID IN (SELECT Product_ID FROM pa WHERE attribute_id = ? AND value = ?)";
         params.push(xss(req.query.attribute));
         params.push(xss(req.query.value));
     }
 
     query += `
             GROUP BY 
-            Products.Product_ID,
-            Product_Sellers.seller_id
+            p.Product_ID,
+            ps.seller_id
             `;
       
 
