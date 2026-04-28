@@ -124,10 +124,9 @@ export default function ProductFeed() {
       Product Search System with Filtering Options
     </h1>
 
-    <div className="flex flex-col md:flex-row gap-4 md:gap-6">
-      <h2 className="font-semibold mb-2">Filters</h2>
-
+    <div className="flex flex-col md:flex-row gap-6">
       <div className="w-full md:w-64 flex-shrink-0">
+        <h2 className="font-semibold mb-2">Filters</h2>
         <div className="mb-4">
           <button
             onClick={() => {
@@ -364,3 +363,5 @@ export default function ProductFeed() {
     </div>
   </div>
 );}
+
+
