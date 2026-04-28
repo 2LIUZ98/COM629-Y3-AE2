@@ -281,11 +281,26 @@ const rateNumber =
               {products.map((p, i) => (
                 <div
                   key={i}
-                  className="border border-gray-200 rounded p-3 mt-3"
+                  className="border border-gray-200 rounded p-3 mt-3 flex gap-4"
                 >
-                  <h3 className="font-semibold text-lg">{p.product_name}</h3>
-                  <p>£{p.price}</p>
-                  <p className="text-gray-500 text-sm">{p.seller_name}</p>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg">{p.product_name}</h3>
+                    <p className="text-gray-800">£{p.price}</p>
+                    <p className="text-gray-500 text-sm">{p.seller_name}</p>
+                  </div>
+
+                  <div className="w-40 text-sm text-gray-600">
+                    {p.attributes?.length > 0 ? (
+                      p.attributes.map((a, idx) => (
+                        <div key={idx}>
+                          <span className="font-semibold">{a.name}:</span>{" "}
+                          {a.value}
+                        </div>
+                      ))
+                    ) : (
+                      <span className="text-gray-400">No attributes</span>
+                    )}
+                  </div>
                 </div>
               ))}
             </>
