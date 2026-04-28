@@ -126,10 +126,10 @@ export default function ProductFeed() {
 </div>
 
     <h1 className="text-2xl font-bold">
-      Product Search System with Filtering Options
+      Product Search System with Filtering Options 123
     </h1>
 
-    <div className="flex flex-row md:gap-6">
+    <div className="flex flex-col md:flex-row gap-6">
       <div className="w-full md:w-64 flex-shrink-0">
         <h2 className="font-semibold mb-2">Filters</h2>
         <div className="mb-4">
