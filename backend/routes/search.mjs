@@ -25,10 +25,12 @@ searchRouter.get('/products', (req, res) => {
             ON Products.Product_ID = Ratings.Product_ID
         LEFT JOIN Product_Tags 
             ON Products.Product_ID = Product_Tags.Product_ID
-        LEFT JOIN Product_Attributes 
-            ON Products.Product_ID = Product_Attributes.Product_ID    
-        LEFT JOIN Attributes 
-            ON Product_Attributes.Attribute_ID = Attributes.Attribute_ID       
+        (SELECT GROUP_CONCAT(a.attribute_name || ':' || pa.value)
+        FROM Product_Attributes pa
+        LEFT JOIN Attributes a
+            ON pa.attribute_id = a.attribute_id
+        WHERE pa.Product_ID = Products.Product_ID
+        ) AS attributes     
         WHERE 1=1
         `;
 
@@ -87,7 +89,17 @@ searchRouter.get('/products', (req, res) => {
     try {
     const stmt = db.prepare(query);
     const results = stmt.all(...params);
-    res.json(results);
+
+    const format = results.map(p => ({
+        ...p,
+        attributes: p.attributes
+            ? p.attributes.split(",").map(item => {
+                const [name, value] = item.split(":");
+                return { name, value };
+            })
+            : []
+        }));
+    res.json(format);
     } catch (err) {
         console.error("SQL ERROR:", err.message);
         res.status(500).json({ error: err.message });
