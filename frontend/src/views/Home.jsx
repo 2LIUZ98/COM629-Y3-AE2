@@ -117,9 +117,14 @@ export default function ProductFeed() {
       }, 0);
     };
 
+    console.log("width", window.innerWidth);
+console.log("visual", window.visualViewport?.width);
+
     return (
       
   <div className="p-5 flex flex-col gap-6">
+  
+
     <h1 className="text-2xl font-bold">
       Product Search System with Filtering Options
     </h1>
