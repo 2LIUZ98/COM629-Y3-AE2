@@ -10,7 +10,7 @@ searchRouter.get('/products', (req, res) => {
             Products.product_name,
             Products.category_id,
             Products.brand_id,
-            MIN(Product_Sellers.price) AS price,
+            Product_Sellers.price,
             Product_Sellers.seller_id,
             Sellers.seller_name,
             AVG(Ratings.rating) AS avg_rate,
@@ -52,16 +52,15 @@ searchRouter.get('/products', (req, res) => {
         params.push(xss(req.query.seller));
     }
 
-    let priceA = [];
-
-    if (req.query.minPrice) {
-        priceA.push("MIN(Product_Sellers.price) >= ?");
-        params.push(req.query.minPrice);
+     if (req.query.minPrice) {
+        query += " AND Product_Sellers.price >= ?";
+        params.push(xss(req.query.minPrice));
     }
+ 
 
     if (req.query.maxPrice) {
-        priceA.push("MIN(Product_Sellers.price) <= ?");
-        params.push(req.query.maxPrice);
+        query += " AND Product_Sellers.price <= ?";
+        params.push(xss(req.query.maxPrice));
     }
 
 
@@ -81,10 +80,7 @@ searchRouter.get('/products', (req, res) => {
             Products.Product_ID,
             Product_Sellers.seller_id
             `;
-
-    if (priceA.length > 0) {
-        query += " HAVING " + priceA.join(" AND ");
-    }        
+      
 
     try {
     const stmt = db.prepare(query);
