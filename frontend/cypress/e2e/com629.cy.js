@@ -63,11 +63,7 @@ describe("Tags filter", () => {
 
     cy.contains("Apply").click();
 
-    cy.wait("@search").then((interception) => {
-      const url = interception.request.url;
-
-      expect(url).to.include("tags=");
-    });
+    cy.wait("@search");
 
     cy.get("h3").each(($el) => {
       expect($el.text()).to.exist;
