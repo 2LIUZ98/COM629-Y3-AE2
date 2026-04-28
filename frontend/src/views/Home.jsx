@@ -127,7 +127,7 @@ export default function ProductFeed() {
     <div className="flex flex-col md:flex-row gap-4 md:gap-6">
       <h2 className="font-semibold mb-2">Filters</h2>
 
-      <div className="w-64 flex-shrink-0">
+      <div className="w-full md:w-64 flex-shrink-0">
         <div className="mb-4">
           <button
             onClick={() => {
