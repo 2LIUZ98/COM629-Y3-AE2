@@ -188,8 +188,7 @@ export default function ProductFeed() {
             className="border border-gray-300 rounded px-3 py-2"
           />
 
-          <ActionButtons
-            onApply={fetchProducts}
+          <ResetButton
             onReset={() => {
               setMinPrice("");
               setMaxPrice("");
@@ -222,8 +221,7 @@ export default function ProductFeed() {
               );
             })}
           </div>
-          <ActionButtons
-            onApply={fetchProducts}
+          <ResetButton
             onReset={() => {
               setSelectedTags([]);
             }}
