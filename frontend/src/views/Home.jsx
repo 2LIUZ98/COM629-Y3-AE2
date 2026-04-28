@@ -229,7 +229,7 @@ export default function ProductFeed() {
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter") fetchProducts();
+              if (e.key === "Enter") handleSearch();
             }}
             className="flex-1 border border-gray-300 rounded px-3 py-2"
           />
