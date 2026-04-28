@@ -264,14 +264,11 @@ export default function ProductFeed() {
             {products.length} results
           </p>
 
-          <button
-            onClick={() => {
-              handleReset();
+          <ResetButton
+            onReset={() => {
+              setKeyword("");
             }}
-            className="bg-white text-[#05339C] px-4 py-2 rounded border border-[#05339C] hover:bg-[#05339C] hover:text-white transition"
-          >
-            Reset
-          </button>
+          />
 
         </div>
 

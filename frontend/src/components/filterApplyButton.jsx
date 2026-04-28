@@ -1,6 +1,6 @@
 export default function ResetButton({ onReset }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-4">
 
       <button
         onClick={onReset}
