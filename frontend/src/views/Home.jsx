@@ -346,7 +346,7 @@ export default function ProductFeed() {
 
                   </div>
 
-                  <div className="w-full text-sm text-gray-600">
+                  <div className="flex-1 text-sm text-gray-600">
                     {p.attributes?.length > 0 ? (
                       p.attributes.map((a, idx) => (
                         <div key={idx}>
