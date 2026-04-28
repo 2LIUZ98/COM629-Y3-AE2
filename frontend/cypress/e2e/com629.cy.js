@@ -1,4 +1,4 @@
-describe("Product Search System", () => {
+describe("Search + Category Filter", () => {
   it("loads the page", () => {
     cy.visit("https://com629-y3-ae2.onrender.com", {
   timeout: 60000,
@@ -20,7 +20,6 @@ describe("Product Search System", () => {
     cy.visit("https://com629-y3-ae2.onrender.com");
 
     cy.contains("Phones").click();
-    cy.contains("Apply").click();
 
     cy.get("h3").should("exist");
   });
@@ -35,8 +34,6 @@ describe("Price filter test", () => {
     cy.get('input[placeholder="Min"]').type("100");
 
     cy.get('input[placeholder="Max"]').type("500");
-
-    cy.contains("Apply").click();
 
     cy.get("body").should("contain", "£");
 
