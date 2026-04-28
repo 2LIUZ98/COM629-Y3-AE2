@@ -304,23 +304,33 @@ export default function ProductFeed() {
                     <p className="text-gray-500 text-sm">{p.seller_name}</p>
                   </div>
 
-                  <div className="w-40 text-sm">
-                    {p.stock > 0 ? (
-                      <p className="text-gray-700">
-                        Stock: {p.stock}
-                      </p>
-                    ) : (
-                      <p className="text-red-500 font-semibold">
-                        No stock available!
-                      </p>
-                    )}
-
-                    <div className="mt-2 text-[#05339C]">
-                      ⭐ {p.avg_rate ? Number(p.avg_rate).toFixed(1) : "No rating"}
-                      <span className="text-gray-500 block">
-                        ({p.c_rate || 0} reviews)
-                      </span>
+                  <div className="w-40 text-sm flex justify-between items-start">
+                    
+                    <div>
+                      {p.stock > 0 ? (
+                        <p className="text-gray-700">
+                          Stock available
+                        </p>
+                      ) : (
+                        <p className="text-red-500 font-semibold">
+                          No stock available!
+                        </p>
+                      )}
                     </div>
+
+                    <div className="text-right">
+                      <p className="text-gray-700">
+                        Stock: {p.stock ?? 0}
+                      </p>
+
+                      <div className="mt-2 text-[#05339C]">
+                        ⭐ {p.avg_rate ? Number(p.avg_rate).toFixed(1) : "No rating"}
+                        <span className="text-gray-500 block">
+                          ({p.c_rate || 0} reviews)
+                        </span>
+                      </div>
+                    </div>
+
                   </div>
 
                   <div className="w-40 text-sm text-gray-600">
