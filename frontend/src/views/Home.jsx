@@ -131,12 +131,7 @@ export default function ProductFeed() {
         <div className="mb-4">
           <button
             onClick={() => {
-              setKeyword("");
-              setSelectedCategory(null);
-              setMinPrice("");
-              setMaxPrice("");
-              setSelectedTags([]);
-              fetchProducts();
+              handleReset()
             }}
             className="w-full bg-white text-[#05339C] px-3 py-2 rounded border border-[#05339C] 
                       transition hover:bg-[#05339C] hover:text-white"
