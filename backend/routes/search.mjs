@@ -52,15 +52,8 @@ searchRouter.get('/products', (req, res) => {
         params.push(xss(req.query.seller));
     }
 
-    if (req.query.minPrice) {
-        query += " AND Product_Sellers.price >= ?";
-        params.push(xss(req.query.minPrice));
-    }
+ 
 
-    if (req.query.maxPrice) {
-        query += " AND Product_Sellers.price <= ?";
-        params.push(xss(req.query.maxPrice));
-    }
 
     if (req.query.tags) {
         query += " AND Products.Product_ID IN (SELECT Product_ID FROM Product_Tags WHERE tag_id = ?)";
