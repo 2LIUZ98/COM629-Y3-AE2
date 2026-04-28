@@ -86,12 +86,42 @@ searchRouter.get('/products', (req, res) => {
 
     try {
     const stmt = db.prepare(query);
-    const results = stmt.all(...params);
-    res.json(results);
-    } catch (err) {
-        console.error("SQL ERROR:", err.message);
-        res.status(500).json({ error: err.message });
-    }
+    const rows = stmt.all(...params);
+
+    const grouped = {};
+
+    rows.forEach(row => {
+        const id = row.Product_ID;
+
+        if (!grouped[id]) {
+            grouped[id] = {
+                Product_ID: row.Product_ID,
+                product_name: row.product_name,
+                category_id: row.category_id,
+                brand_id: row.brand_id,
+                price: row.price,
+                seller_id: row.seller_id,
+                seller_name: row.seller_name,
+                avg_rate: row.avg_rate,
+                c_rate: row.c_rate,
+                attributes: []
+            };
+        }
+
+        if (row.Attribute_ID && row.attribute_name) {
+            grouped[id].attributes.push({
+                name: row.attribute_name,
+                value: row.value
+            });
+        }
+    });
+
+    res.json(Object.values(grouped));
+
+} catch (err) {
+    console.error("SQL ERROR:", err.message);
+    res.status(500).json({ error: err.message });
+}
 
 });
 
