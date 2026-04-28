@@ -305,9 +305,15 @@ export default function ProductFeed() {
                   </div>
 
                   <div className="w-40 text-sm">
-                    <p className="text-gray-700">
-                      Stock: {p.stock ?? 0}
-                    </p>
+                    {p.stock > 0 ? (
+                      <p className="text-gray-700">
+                        Stock: {p.stock}
+                      </p>
+                    ) : (
+                      <p className="text-red-500 font-semibold">
+                        No stock available!
+                      </p>
+                    )}
 
                     <div className="mt-2 text-[#05339C]">
                       ⭐ {p.avg_rate ? Number(p.avg_rate).toFixed(1) : "No rating"}
