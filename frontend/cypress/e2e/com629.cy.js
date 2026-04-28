@@ -59,7 +59,7 @@ describe("Tags filter", () => {
 
     cy.visit("https://com629-y3-ae2.onrender.com");
 
-    cy.get('input[type="checkbox"]').eq|(4).check({ force: true });
+    cy.get('input[type="checkbox"]').eq(4).check({ force: true });
 
     cy.contains("Apply").click();
 
