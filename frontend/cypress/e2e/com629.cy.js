@@ -53,3 +53,24 @@ describe("Price filter test", () => {
   });
 });
 
+describe("Tags filter", () => {
+  it("filter products using tags filter", () => {
+    cy.intercept("GET", "**/search/products*").as("search");
+
+    cy.visit("https://com629-y3-ae2.onrender.com");
+
+    cy.get('input[type="checkbox"]').first().check({ force: true });
+
+    cy.contains("Apply").click();
+
+    cy.wait("@search").then((interception) => {
+      const url = interception.request.url;
+
+      expect(url).to.include("tags=");
+    });
+
+    cy.get("h3").each(($el) => {
+      expect($el.text()).to.exist;
+    });
+  });
+});
