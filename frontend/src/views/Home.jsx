@@ -288,7 +288,7 @@ export default function ProductFeed() {
               {products.map((p, i) => (
                 <div
                   key={i}
-                  className="border border-gray-200 rounded p-3 mt-3 flex gap-4"
+                  className="border border-gray-200 rounded p-3 mt-3 flex flex-col md:flex-row gap-4"
                 >
                   <div className="flex-1">
                     <h3 className="font-semibold text-lg">{p.product_name}</h3>
