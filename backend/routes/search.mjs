@@ -78,8 +78,7 @@ searchRouter.get('/products', (req, res) => {
 
     query += `
             GROUP BY 
-            Products.Product_ID,
-            Product_Sellers.seller_id
+            Products.Product_ID
             `;
 
     if (priceA.length > 0) {
