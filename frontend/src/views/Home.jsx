@@ -120,13 +120,8 @@ export default function ProductFeed() {
     return (
       
   <div className="p-5 flex flex-col gap-6">
-
-    <div className="fixed top-0 left-0 bg-red-500 text-white z-50">
-  WIDTH: {window.innerWidth}
-</div>
-
     <h1 className="text-2xl font-bold">
-      Product Search System with Filtering Options 123
+      Product Search System with Filtering Options
     </h1>
 
     <div className="flex flex-col md:flex-row gap-6">
