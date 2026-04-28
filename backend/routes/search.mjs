@@ -10,8 +10,9 @@ searchRouter.get('/products', (req, res) => {
             Products.product_name,
             Products.category_id,
             Products.brand_id,
-            Product_Sellers.price,
-            Product_Sellers.seller_id,
+            ps.price,
+            ps_stock,
+            ps.seller_id,
             Sellers.seller_name,
             AVG(Ratings.rating) AS avg_rate,
             COUNT(Ratings.rating) AS c_rate,
@@ -24,10 +25,10 @@ searchRouter.get('/products', (req, res) => {
             ) AS attributes
 
         FROM Products
-        LEFT JOIN Product_Sellers
-            ON Products.Product_ID = Product_Sellers.Product_ID
+        LEFT JOIN Product_Sellers ps
+            ON Products.Product_ID = ps.Product_ID
         LEFT JOIN Sellers
-            ON Sellers.Seller_ID = Product_Sellers.Seller_ID
+            ON Sellers.Seller_ID = ps.Seller_ID
         LEFT JOIN Ratings 
             ON Products.Product_ID = Ratings.Product_ID
         LEFT JOIN Product_Tags 
