@@ -35,16 +35,14 @@ describe("Price filter test", () => {
 
     cy.get('input[placeholder="Max"]').type("500");
 
-    cy.get("body").should("contain", "£");
-
-    cy.get("p")
-      .contains("£")
-      .each(($el) => {
-        const text = $el.text();
-        const price = Number(text.replace("£", ""));
-
-        expect(price).to.be.gte(100);
-        expect(price).to.be.lte(500);
-      });
+   cy.get("p")
+    .contains("£")
+    .each(($el) => {
+      const text = $el.text();
+      const price = Number(text.replace("£", ""));
+      expect(price).to.be.gte(100);
+      expect(price).to.be.lte(500);
+    });
   });
 });
+

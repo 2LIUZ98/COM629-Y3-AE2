@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ResetButton from "../components/filterApplyButton";
+import ActionButtons from "../components/filterApplyButton";
 
 export default function ProductFeed() {
   const [products, setProducts] = useState([]);
@@ -84,7 +84,7 @@ export default function ProductFeed() {
   useEffect(() => {
     fetchTags()
     fetchProducts();
-  }, [selectedCategory, minPrice, maxPrice, selectedTags, keyword]);
+  }, [selectedCategory, keyword]);
 
   const rating =
   Array.isArray(products) && products.length > 0
@@ -183,7 +183,8 @@ export default function ProductFeed() {
             className="border border-gray-300 rounded px-3 py-2"
           />
 
-          <ResetButton
+          <ActionButtons
+            onApply={fetchProducts}
             onReset={() => {
               setMinPrice("");
               setMaxPrice("");
@@ -216,7 +217,8 @@ export default function ProductFeed() {
               );
             })}
           </div>
-          <ResetButton
+          <ActionButtons
+            onApply={fetchProducts}
             onReset={() => {
               setSelectedTags([]);
             }}
@@ -264,12 +266,14 @@ export default function ProductFeed() {
             {products.length} results
           </p>
 
-          <ResetButton
-            onReset={() => {
+          <button
+            onClick={() => {
               setKeyword("");
-            }}
-          />
-
+              }}
+            className="bg-white text-[#05339C] px-4 py-2 rounded border border-[#05339C] hover:bg-[#05339C] hover:text-white transition"
+          >
+            Reset
+          </button>
         </div>
 
         <div className="mt-4">
