@@ -104,10 +104,18 @@ export default function ProductFeed() {
       fetchProducts();
     };   
 
-    const handleReset = () => {
+    const handleReset = async () => {
+      setKeyword("");
+      setSelectedCategory(null);
+      setMinPrice("");
+      setMaxPrice("");
+      setSelectedTags([]);
       setHasSearched(false);
-      fetchProducts();
-    };  
+
+      setTimeout(() => {
+        fetchProducts();
+      }, 0);
+    };
 
     return (
   <div className="p-5 flex flex-col gap-6">
@@ -265,10 +273,6 @@ export default function ProductFeed() {
 
           <button
             onClick={() => {
-              setKeyword("");
-              setSelectedCategory(null);
-              setMinPrice("");
-              setMaxPrice("");
               handleReset();
             }}
             className="bg-white text-[#05339C] px-4 py-2 rounded border border-[#05339C] hover:bg-[#05339C] hover:text-white transition"
