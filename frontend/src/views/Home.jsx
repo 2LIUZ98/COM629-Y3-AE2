@@ -298,8 +298,16 @@ export default function ProductFeed() {
                 >
                   <div className="flex-1">
                     <h3 className="font-semibold text-lg">{p.product_name}</h3>
+
                     <p className="text-gray-800">£{p.price}</p>
                     <p className="text-gray-500 text-sm">{p.seller_name}</p>
+
+                    <div className="mt-2 text-sm text-[#05339C]">
+                      ⭐ {p.avg_rate ? Number(p.avg_rate).toFixed(1) : "No rating"}{" "}
+                      <span className="text-gray-500">
+                        ({p.c_rate || 0} reviews)
+                      </span>
+                    </div>
                   </div>
 
                   <div className="w-40 text-sm text-gray-600">
