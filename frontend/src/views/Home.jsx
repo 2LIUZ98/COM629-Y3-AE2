@@ -84,7 +84,7 @@ export default function ProductFeed() {
   useEffect(() => {
     fetchTags()
     fetchProducts();
-  }, [selectedCategory, minPrice, maxPrice, selectedTags]);
+  }, [selectedCategory, minPrice, maxPrice, selectedTags, keyword]);
 
   const rating =
   Array.isArray(products) && products.length > 0
