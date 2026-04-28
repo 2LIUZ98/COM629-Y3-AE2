@@ -294,31 +294,46 @@ export default function ProductFeed() {
                     <p className="text-gray-500 text-sm">{p.seller_name}</p>
                   </div>
 
-                  <div className="w-40 text-sm flex justify-between items-start">
-                    
+                  <div className="w-48 text-sm flex flex-col gap-2">
                     <div>
-                      {p.stock > 0 ? (
-                        <p className="text-green-700">
-                          Stock available
-                        </p>
+                      {p.status === 1 ? (
+                        <span className="px-2 py-1 rounded bg-green-600 text-white text-xs font-semibold">
+                          Active
+                        </span>
                       ) : (
-                        <p className="text-red-500 font-semibold">
-                          No stock available!
-                        </p>
+                        <span className="px-2 py-1 rounded bg-red-600 text-white text-xs font-semibold">
+                          Discontinued
+                        </span>
                       )}
                     </div>
 
-                    <div className="text-right">
-                      <p className="text-gray-700">
-                        Stock: {p.stock ?? 0}
-                      </p>
-
-                      <div className="mt-2 text-[#05339C]">
-                        ⭐ {p.avg_rate ? Number(p.avg_rate).toFixed(1) : "No rating"}
-                        <span className="text-gray-500 block">
-                          ({p.c_rate || 0} reviews)
-                        </span>
+                    <div className="flex justify-between items-start">
+                      
+                      <div>
+                        {p.stock > 0 ? (
+                          <p className="text-green-700">
+                            Stock available
+                          </p>
+                        ) : (
+                          <p className="text-red-500 font-semibold">
+                            No stock available!
+                          </p>
+                        )}
                       </div>
+
+                      <div className="text-right">
+                        <p className="text-gray-700">
+                          Stock: {p.stock ?? 0}
+                        </p>
+
+                        <div className="mt-2 text-[#05339C]">
+                          ⭐ {p.avg_rate ? Number(p.avg_rate).toFixed(1) : "No rating"}
+                          <span className="text-gray-500 block">
+                            ({p.c_rate || 0} reviews)
+                          </span>
+                        </div>
+                      </div>
+
                     </div>
 
                   </div>
