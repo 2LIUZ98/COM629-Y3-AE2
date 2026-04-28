@@ -40,7 +40,6 @@ export default function ProductFeed() {
 
   const fetchProducts = async () => {
     setLoading(true);
-    setHasSearched(true);
 
     let url = "https://com629-y3-ae2.onrender.com/search/products";
     let params = [];
@@ -95,10 +94,15 @@ export default function ProductFeed() {
       ).toFixed(1)
     : null;
 
-const rateNumber =
-  Array.isArray(products)
-    ? products.reduce((sum, p) => sum + (p.c_rate || 0), 0)
-    : 0;
+  const rateNumber =
+    Array.isArray(products)
+      ? products.reduce((sum, p) => sum + (p.c_rate || 0), 0)
+      : 0;
+
+  const handleSearch = () => {
+      setHasSearched(true);
+      fetchProducts();
+    };   
 
     return (
   <div className="p-5 flex flex-col gap-6">
@@ -231,7 +235,7 @@ const rateNumber =
           />
 
           <button
-            onClick={fetchProducts}
+            onClick={handleSearch}
             className="bg-[#05339C] text-white px-4 py-2 rounded border border-[#05339C] transition hover:bg-white hover:text-[#05339C]"
           >
             Search
