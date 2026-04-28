@@ -64,11 +64,6 @@ searchRouter.get('/products', (req, res) => {
         params.push(req.query.maxPrice);
     }
 
-    
-    if (priceA.length > 0) {
-        query += " HAVING " + priceA.join(" AND ");
-    }
-
 
     if (req.query.tags) {
         query += " AND Products.Product_ID IN (SELECT Product_ID FROM Product_Tags WHERE tag_id = ?)";
@@ -87,16 +82,19 @@ searchRouter.get('/products', (req, res) => {
             Product_Sellers.seller_id
             `;
 
+    if (priceA.length > 0) {
+        query += " HAVING " + priceA.join(" AND ");
+    }        
+
     try {
     const stmt = db.prepare(query);
     const results = stmt.all(...params);
     res.json(results);
-} catch (err) {
-    console.error("SQL ERROR:", err.message);
-    res.status(500).json({ error: err.message });
-}
+    } catch (err) {
+        console.error("SQL ERROR:", err.message);
+        res.status(500).json({ error: err.message });
+    }
 
-  
 });
 
 
