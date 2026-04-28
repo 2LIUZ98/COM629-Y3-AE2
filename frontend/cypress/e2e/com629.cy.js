@@ -16,6 +16,20 @@ describe("Search + Category Filter", () => {
     cy.get("h3").should("exist");
   });
 
+
+  it("resets search", () => {
+    cy.visit("https://com629-y3-ae2.onrender.com");
+    cy.contains("Search")
+          .parent()
+          .within(() => {
+            cy.contains("Reset").click();
+          });
+
+        cy.contains("Apply").click();
+
+        cy.get("h3").should("exist");
+      });
+
   it("toggles category filter", () => {
     cy.visit("https://com629-y3-ae2.onrender.com");
 
@@ -26,12 +40,12 @@ describe("Search + Category Filter", () => {
 });
 
 describe("Price filter test", () => {
-  it("filters products using min and max price", () => {
+  it("filters products using price filter", () => {
     cy.visit("https://com629-y3-ae2.onrender.com");
 
     cy.contains("Product Search System", { timeout: 10000 });
 
-    cy.intercept("GET", "**/search/products*").as("searching");
+    cy.intercept("GET", "**/search/products*").as("searchingFilterPrice");
 
     cy.get('input[placeholder="Min"]').type("100");
 
@@ -40,7 +54,7 @@ describe("Price filter test", () => {
 
     cy.contains("Apply").click();
 
-    cy.wait("@searching");
+    cy.wait("@searchingFilterPrice");
 
     cy.get("p")
      .contains("£")
@@ -51,11 +65,29 @@ describe("Price filter test", () => {
        expect(price).to.be.lte(500);
      });
   });
+
+  it("resets price filter", () => {
+    cy.intercept("GET", "**/search/products*").as("searchingRestPrice");
+
+    cy.visit("https://com629-y3-ae2.onrender.com");
+
+    cy.contains("Price")
+      .parent()
+      .within(() => {
+        cy.contains("Reset").click();
+      });
+
+    cy.contains("Apply").click();
+
+    cy.wait("@searchingRestPrice");
+
+    cy.get("h3").should("exist");
+  });
 });
 
-describe("Tags filter", () => {
+describe("Tags filter + reset", () => {
   it("filter products using tags filter", () => {
-    cy.intercept("GET", "**/search/products*").as("search");
+    cy.intercept("GET", "**/search/products*").as("searchingFilterTags");
 
     cy.visit("https://com629-y3-ae2.onrender.com");
 
@@ -63,10 +95,29 @@ describe("Tags filter", () => {
 
     cy.contains("Apply").click();
 
-    cy.wait("@search");
+    cy.wait("@searchingFilterTags");
 
     cy.get("h3").each(($el) => {
       expect($el.text()).to.exist;
     });
   });
+
+  it("resets tags filter", () => {
+    cy.intercept("GET", "**/search/products*").as("searchingResetTags");
+
+    cy.visit("https://com629-y3-ae2.onrender.com");
+
+    cy.contains("Tags")
+      .parent()
+      .within(() => {
+        cy.contains("Reset").click();
+      });
+
+    cy.contains("Apply").click();
+
+    cy.wait("@searchingResetTags");
+
+    cy.get("h3").should("exist");
+  });
 });
+
