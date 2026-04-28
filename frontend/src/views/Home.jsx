@@ -104,6 +104,11 @@ export default function ProductFeed() {
       fetchProducts();
     };   
 
+    const handleReset = () => {
+      setHasSearched(false);
+      fetchProducts();
+    };  
+
     return (
   <div className="p-5 flex flex-col gap-6">
 
@@ -264,7 +269,7 @@ export default function ProductFeed() {
               setSelectedCategory(null);
               setMinPrice("");
               setMaxPrice("");
-              fetchProducts();
+              handleReset();
             }}
             className="bg-white text-[#05339C] px-4 py-2 rounded border border-[#05339C] hover:bg-[#05339C] hover:text-white transition"
           >
