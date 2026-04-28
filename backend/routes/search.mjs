@@ -14,7 +14,14 @@ searchRouter.get('/products', (req, res) => {
             Product_Sellers.seller_id,
             Sellers.seller_name,
             AVG(Ratings.rating) AS avg_rate,
-            COUNT(Ratings.rating) AS c_rate
+            COUNT(Ratings.rating) AS c_rate,
+            (
+                SELECT GROUP_CONCAT(a.attribute_name || ':' || pa.value)
+                FROM Product_Attributes pa
+                LEFT JOIN Attributes a
+                    ON pa.attribute_id = a.attribute_id
+                WHERE pa.Product_ID = Products.Product_ID
+            ) AS attributes
 
         FROM Products
         LEFT JOIN Product_Sellers
@@ -24,13 +31,7 @@ searchRouter.get('/products', (req, res) => {
         LEFT JOIN Ratings 
             ON Products.Product_ID = Ratings.Product_ID
         LEFT JOIN Product_Tags 
-            ON Products.Product_ID = Product_Tags.Product_ID
-        (SELECT GROUP_CONCAT(a.attribute_name || ':' || pa.value)
-        FROM Product_Attributes pa
-        LEFT JOIN Attributes a
-            ON pa.attribute_id = a.attribute_id
-        WHERE pa.Product_ID = Products.Product_ID
-        ) AS attributes     
+            ON Products.Product_ID = Product_Tags.Product_ID   
         WHERE 1=1
         `;
 
