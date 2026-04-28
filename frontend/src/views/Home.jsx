@@ -308,7 +308,7 @@ export default function ProductFeed() {
                     
                     <div>
                       {p.stock > 0 ? (
-                        <p className="text-gray-700">
+                        <p className="text-green-700">
                           Stock available
                         </p>
                       ) : (
