@@ -1,7 +1,7 @@
-export default function ActionButtons({ onApply, onReset }) {
+export default function ResetButton({ onReset }) {
   return (
     <div className="flex gap-2">
-      
+
       <button
         onClick={onReset}
         className="w-1/2 bg-white text-[#05339C] px-4 py-2 rounded border border-[#05339C]
