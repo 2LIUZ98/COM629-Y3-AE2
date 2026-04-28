@@ -11,7 +11,7 @@ searchRouter.get('/products', (req, res) => {
             p.category_id,
             p.brand_id,
             ps.price,
-            ps_stock,
+            ps.stock,
             ps.seller_id,
             s.seller_name,
             AVG(Ratings.rating) AS avg_rate,
