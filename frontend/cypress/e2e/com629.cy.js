@@ -31,18 +31,25 @@ describe("Price filter test", () => {
 
     cy.contains("Product Search System", { timeout: 10000 });
 
+    cy.intercept("GET", "**/search/products*").as("searching");
+
     cy.get('input[placeholder="Min"]').type("100");
 
     cy.get('input[placeholder="Max"]').type("500");
 
-   cy.get("p")
-    .contains("£")
-    .each(($el) => {
-      const text = $el.text();
-      const price = Number(text.replace("£", ""));
-      expect(price).to.be.gte(100);
-      expect(price).to.be.lte(500);
-    });
+
+    cy.contains("Apply").click();
+
+    cy.wait("@searching");
+
+    cy.get("p")
+     .contains("£")
+     .each(($el) => {
+       const text = $el.text();
+       const price = Number(text.replace("£", ""));
+       expect(price).to.be.gte(100);
+       expect(price).to.be.lte(500);
+     });
   });
 });
 
